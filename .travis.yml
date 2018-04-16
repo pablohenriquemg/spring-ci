@@ -1,15 +1,11 @@
 language: java
 jdk: oraclejdk8
-
-env:
-  global:
-  - secure: 56b22c3bf240477a1e044edf5deb62db171bbe55
  
 addons:
   sonarcloud:
     organization: pablohenriquemg-github
     token:
-      secure: $SONAR_TOKEN
+      secure: 56b22c3bf240477a1e044edf5deb62db171bbe55
  
 script:
 - ./mvnw clean install -B
