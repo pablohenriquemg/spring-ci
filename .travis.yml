@@ -1,12 +1,23 @@
+sudo: required
 language: java
 jdk: oraclejdk8
- 
+
+deploy:
+  provider: heroku
+  api_key: f51e6558-103d-4a39-af5a-3a6d83e0301c
+  app: ci-spring-poc
+
 addons:
   sonarcloud:
     organization: pablohenriquemg-github
     token:
       secure: 56b22c3bf240477a1e044edf5deb62db171bbe55
- 
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+
 script:
 - ./mvnw clean install -B
 - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
