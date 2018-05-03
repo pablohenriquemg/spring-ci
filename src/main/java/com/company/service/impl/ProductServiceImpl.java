@@ -1,4 +1,4 @@
-package com.company.service;
+package com.company.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.model.Product;
 import com.company.repository.ProductRepository;
+import com.company.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
