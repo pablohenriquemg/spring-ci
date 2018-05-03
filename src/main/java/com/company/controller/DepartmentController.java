@@ -11,23 +11,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.model.Product;
-import com.company.service.ProductService;
+import com.company.model.Department;
+import com.company.payload.GenericResponse;
+import com.company.service.DepartmentService;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/departments")
+public class DepartmentController {
 
 	@Autowired
-	private ProductService productService;
+	private DepartmentService departmentService;
 
 	@GetMapping
-	public List<Product> getProducts() {
-		return productService.findAll();
+	public GenericResponse<List<Department>> getDepartments() {
+		List<Department> list = departmentService.findAll();
+		return new GenericResponse<>(list, null);
 	}
 
 	@PostMapping
-	public Product saveProduct(@NotNull @RequestBody Product product) {
-		return productService.save(product);
+	public Department saveDepartment(@NotNull @RequestBody Department department) {
+		return departmentService.save(department);
 	}
 }

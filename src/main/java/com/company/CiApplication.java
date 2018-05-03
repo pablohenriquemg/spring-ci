@@ -2,15 +2,15 @@ package com.company;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.company.model.Product;
-import com.company.repository.ProductRepository;
+import com.company.model.Department;
+import com.company.repository.DepartmentRepository;
 
 @SpringBootApplication
-@EnableScheduling
+@EnableAutoConfiguration
 public class CiApplication {
 
 	public static void main(String[] args) {
@@ -18,12 +18,22 @@ public class CiApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(ProductRepository repository) {
+	ApplicationRunner init(DepartmentRepository departmentRepository) {
 		return args -> {
-			Product product = new Product();
-			product.setName("Apple");
-			product.setDescription("Red fruit");
-			repository.save(product);
+			Department department1 = new Department();
+			department1.setName("Computer engineering");
+			department1.setDescription(
+					"Department that will handle matters related to information technology and communication.");
+			departmentRepository.save(department1);
+			Department department2 = new Department();
+			department2.setName("Pre sales");
+			department2.setDescription(
+					"Department responsible for making the first contact with the customer to present commercial proposals.");
+			departmentRepository.save(department2);
+			Department department3 = new Department();
+			department3.setName("Human resources");
+			department3.setDescription("Department that will admit new employees and take care of business benefits.");
+			departmentRepository.save(department3);
 		};
 	}
 }
