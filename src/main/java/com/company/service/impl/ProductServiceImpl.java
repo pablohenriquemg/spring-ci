@@ -1,11 +1,11 @@
 package com.company.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.model.Product;
+import com.company.payload.GenericResponse;
+import com.company.payload.MessageResponse;
 import com.company.repository.ProductRepository;
 import com.company.service.ProductService;
 
@@ -16,13 +16,23 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository productRepository;
 
 	@Override
-	public List<Product> findAll() {
-		return productRepository.findAll();
+	public GenericResponse<?> findAll() {
+		try {
+			return new GenericResponse<>(productRepository.findAll(), null);
+		} catch (Exception e) {
+			MessageResponse error = new MessageResponse("not.located", "Products not find, try again later.");
+			return new GenericResponse<>(null, error);
+		}
 	}
 
 	@Override
-	public Product save(Product product) {
-		return productRepository.save(product);
+	public GenericResponse<?> save(Product product) {
+		try {
+			return new GenericResponse<>(productRepository.save(product), null);
+		} catch (Exception e) {
+			MessageResponse error = new MessageResponse("not.saved", "Product not saved, try again later.");
+			return new GenericResponse<>(null, error);
+		}
 	}
 
 }

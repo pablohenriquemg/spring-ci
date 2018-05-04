@@ -1,12 +1,11 @@
 package com.company.service;
 
-import java.util.List;
-
 import com.company.model.Product;
+import com.company.payload.GenericResponse;
 
 public interface ProductService {
 
-	List<Product> findAll();
+	GenericResponse<?> findAll();
 
-	Product save(Product product);
+	GenericResponse<?> save(Product product);
 }
