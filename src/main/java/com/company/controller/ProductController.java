@@ -1,7 +1,5 @@
 package com.company.controller;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.company.model.Product;
+import com.company.payload.GenericResponse;
 import com.company.service.ProductService;
 
 @RestController
@@ -22,12 +21,12 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping
-	public List<Product> getProducts() {
+	public GenericResponse<?> getProducts() {
 		return productService.findAll();
 	}
 
 	@PostMapping
-	public Product saveProduct(@NotNull @RequestBody Product product) {
+	public GenericResponse<?> saveProduct(@NotNull @RequestBody Product product) {
 		return productService.save(product);
 	}
 }
