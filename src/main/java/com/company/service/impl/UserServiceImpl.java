@@ -1,6 +1,7 @@
 package com.company.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.company.model.User;
@@ -14,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public GenericResponse<?> findAll() {
@@ -38,6 +42,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public GenericResponse<?> save(User user) {
 		try {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			return new GenericResponse<>(userRepository.save(user), null);
 		} catch (Exception e) {
 			MessageResponse error = new MessageResponse("not.saved", "User not saved, try again later.");

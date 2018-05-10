@@ -1,10 +1,8 @@
-package com.company;
+package com.company.controller;
 
 import org.junit.Before;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-
-import com.company.common.FileUtils;
 
 public class BaseControllerTest {
 
@@ -20,7 +18,4 @@ public class BaseControllerTest {
 		applicationContext.registerSingleton("exceptionHandler", GlobalExceptionHandlerExceptionTest.class);
 	}
 
-	protected String read(String fileName) throws Exception {
-		return FileUtils.read(String.format("%s%s", PATH_RESOURCES, fileName));
-	}
 }

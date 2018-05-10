@@ -1,9 +1,16 @@
 package com.company.security;
 
-public class AccountCredentials {
+import java.io.Serializable;
 
+public class UserDto implements Serializable {
+
+	private static final long serialVersionUID = 7158961446044591948L;
 	private String username;
 	private String password;
+
+	public UserDto() {
+		super();
+	}
 
 	public String getUsername() {
 		return username;
@@ -20,4 +27,5 @@ public class AccountCredentials {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 }
