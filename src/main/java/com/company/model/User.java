@@ -42,6 +42,19 @@ public class User implements Serializable {
 	@JoinColumn(name = "deparment_id")
 	private Department department;
 
+	public User(Long id, String username, String password, String email, Department department) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.department = department;
+	}
+
+	public User() {
+		super();
+	}
+
 	public Long getId() {
 		return id;
 	}
