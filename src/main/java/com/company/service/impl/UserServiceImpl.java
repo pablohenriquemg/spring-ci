@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.company.exception.BadRequestException;
+import com.company.exception.NotFoundException;
 import com.company.model.User;
 import com.company.payload.GenericResponse;
 import com.company.payload.MessageResponse;
@@ -24,8 +26,9 @@ public class UserServiceImpl implements UserService {
 		try {
 			return new GenericResponse<>(userRepository.findAll(), null);
 		} catch (Exception e) {
-			MessageResponse error = new MessageResponse("not.located", "Users not find, try again later.");
-			return new GenericResponse<>(null, error);
+			MessageResponse error = new MessageResponse("not.located", "Users not find, please try again later.");
+			GenericResponse<?> genericResponse = new GenericResponse<>().withError(error);
+			throw new BadRequestException(genericResponse);
 		}
 	}
 
@@ -34,7 +37,8 @@ public class UserServiceImpl implements UserService {
 		User usr = userRepository.findById(id);
 		if (usr == null) {
 			MessageResponse error = new MessageResponse("not.found", "User not found");
-			return new GenericResponse<>(null, error);
+			GenericResponse<?> genericResponse = new GenericResponse<>().withError(error);
+			throw new NotFoundException(genericResponse);
 		}
 		return new GenericResponse<>(usr, null);
 	}
@@ -45,8 +49,10 @@ public class UserServiceImpl implements UserService {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			return new GenericResponse<>(userRepository.save(user), null);
 		} catch (Exception e) {
-			MessageResponse error = new MessageResponse("not.saved", "User not saved, try again later.");
-			return new GenericResponse<>(null, error);
+			MessageResponse error = new MessageResponse("not.saved",
+					"User not saved, please check the fields and then try again.");
+			GenericResponse<?> genericResponse = new GenericResponse<>().withError(error);
+			throw new BadRequestException(genericResponse);
 		}
 	}
 
