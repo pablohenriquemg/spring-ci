@@ -3,6 +3,7 @@ package com.company.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.exception.BadRequestException;
 import com.company.model.Department;
 import com.company.payload.GenericResponse;
 import com.company.payload.MessageResponse;
@@ -40,7 +41,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 		Department dpt = departmentRepository.findById(id);
 		if (dpt == null) {
 			MessageResponse error = new MessageResponse("not.found", "Department not found");
-			return new GenericResponse<>(null, error);
+			GenericResponse<?> genericResponse = new GenericResponse<>().withError(error);
+			throw new BadRequestException(genericResponse);
 		}
 		return new GenericResponse<>(dpt, null);
 	}

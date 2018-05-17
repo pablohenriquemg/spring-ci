@@ -38,4 +38,8 @@ public class GenericResponse<T> implements Serializable {
 		this.error = error;
 	}
 
+	public GenericResponse<T> withError(MessageResponse error){
+		this.setError(error);
+		return this;
+	}
 }
