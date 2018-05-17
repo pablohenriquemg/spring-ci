@@ -2,23 +2,23 @@ package com.company.exception;
 
 import com.company.payload.GenericResponse;
 
-public class BadRequestException extends DomainException {
+public class ForbiddenException extends DomainException {
 
 	private static final long serialVersionUID = -3868512343716957932L;
 
-	public BadRequestException() {
+	public ForbiddenException() {
 		super(new GenericResponse<>());
 	}
 
-	public BadRequestException(String message) {
+	public ForbiddenException(String message) {
 		super(message, new GenericResponse<>());
 	}
 
-	public BadRequestException(GenericResponse<?> genericResponse) {
+	public ForbiddenException(GenericResponse<?> genericResponse) {
 		super(genericResponse);
 	}
 
-	public BadRequestException(String message, Throwable t) {
+	public ForbiddenException(String message, Throwable t) {
 		super(message, t, new GenericResponse<>());
 	}
 }
